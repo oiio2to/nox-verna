@@ -1,0 +1,83 @@
+NoxVerna — License Terms
+版权与许可条款
+
+Copyright (c) 2026 oiio2to. All rights reserved.
+
+--------------------------------------------------------------------------
+1. SOFTWARE / 软件部分
+--------------------------------------------------------------------------
+
+All Rights Reserved.
+
+No license is granted to use, copy, modify, merge, publish, distribute,
+sublicense, or sell any software, source code, or interface implementation
+associated with this project, whether present in this repository or not.
+
+This repository is published for demonstration and review purposes only.
+
+保留全部权利。本项目的软件、源代码与界面实现不授予任何使用、复制、修改、
+合并、发布、分发、再许可或销售的许可。本仓库仅供展示与评阅。
+
+--------------------------------------------------------------------------
+2. DOCUMENTATION, DESIGN SPECIFICATIONS, AND SCREENSHOTS
+   文档、设计规范与截图
+--------------------------------------------------------------------------
+
+The written documentation, design specifications, and interface screenshots
+in this repository are licensed under
+
+    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+    International (CC BY-NC-ND 4.0)
+
+    https://creativecommons.org/licenses/by-nc-nd/4.0/
+
+You may share this material with attribution, for non-commercial purposes,
+without modification.
+
+本仓库中的文字文档、设计规范与界面截图采用
+知识共享 署名-非商业性使用-禁止演绎 4.0 国际许可协议。
+您可以在署名、非商业、不作修改的前提下分享这些材料。
+
+--------------------------------------------------------------------------
+3. SEPARATELY LICENSED COMPONENTS / 单独授权的组件
+--------------------------------------------------------------------------
+
+The memory architecture ("Isle of Breath" / 息之洲) is published in a
+separate repository under the GNU Affero General Public License v3.0 for
+code and CC BY-NC-SA 4.0 for documentation. Those terms govern that
+repository; nothing in this file restricts them.
+
+    https://github.com/oiio2to/isle-of-breath
+
+记忆架构「息之洲 Isle of Breath」在独立仓库中以 AGPL-3.0（代码）与
+CC BY-NC-SA 4.0（文档）发布，本文件不构成对其的任何限制。
+
+--------------------------------------------------------------------------
+4. THIRD-PARTY COMPONENTS / 第三方组件
+--------------------------------------------------------------------------
+
+This project incorporates third-party software, fonts, and services that
+remain subject to their own licenses. See docs/third-party.md.
+
+Fonts referenced in the design system are NOT redistributed by this
+repository and are NOT covered by any license granted above. Anyone
+reproducing this design must obtain their own font licenses.
+
+本项目使用的第三方软件、字体与服务仍受其各自许可证约束，详见
+docs/third-party.md。设计系统中提及的字体不随本仓库分发，也不在上述任何
+授权范围内；复现本设计者需自行取得字体授权。
+
+--------------------------------------------------------------------------
+
+TRADEMARKS / 商标
+
+"NoxVerna" and the associated character names, persona designs, and visual
+identity are not licensed for reuse under any of the terms above.
+
+「NoxVerna」及相关角色名称、人设与视觉识别不在上述任何授权范围内。
+
+--------------------------------------------------------------------------
+
+THE MATERIALS ARE PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
