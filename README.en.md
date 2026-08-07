@@ -4,10 +4,6 @@
 
 [中文 →](README.md)
 
-<p align="center">
-<img src="docs/screens/home.png" width="170"> <img src="docs/screens/enterbase.png" width="170"> <img src="docs/screens/coread.png" width="170"> <img src="docs/screens/glimpse.png" width="170">
-</p>
-
 ---
 
 > **About this repository**
