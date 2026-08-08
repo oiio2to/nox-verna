@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="day">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>NoxVerna · 家庭代码教程</title>
+<style>
+@font-face{font-family:'HuiwenMincho';src:url('https://noxverna.love/fonts/huiwenmincho.woff2') format('woff2');font-display:swap;}
+:root{--bg:linear-gradient(160deg,#ddeede 0%,#ede0e4 55%,#e4eede 100%);--paper:rgba(252,246,238,.92);--paper2:rgba(255,252,248,.95);--ink:#3d2929;--muted:#9a8080;--rose:#b85c72;--sage:#6a9e7a;--clay:#d4844a;--teal:#6a8a8a;--mustard:#b09a3a;--line:rgba(120,100,80,.16);--shadow:2px 2px 0 rgba(166,108,120,.35);--card:0 2px 10px rgba(150,100,90,.10);}
+[data-theme="night"]{--bg:linear-gradient(165deg,#1d1724 0%,#191420 55%,#211a28 100%);--paper:rgba(46,38,52,.90);--paper2:rgba(50,42,56,.92);--ink:#ece4e8;--muted:rgba(210,190,200,.55);--rose:#d8a0b4;--sage:#8ab89a;--clay:#e0a070;--teal:#8aa8a8;--mustard:#d4bc6a;--line:rgba(255,255,255,.09);--shadow:2px 2px 0 rgba(0,0,0,.6);--card:0 2px 14px rgba(0,0,0,.4);}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'HuiwenMincho','Songti SC','Noto Serif SC',serif;font-size:15px;line-height:1.9;letter-spacing:.4px;padding:0 0 80px;min-height:100vh;transition:background .4s}
+.wrap{max-width:720px;margin:0 auto;padding:0 18px}
+.en{font-family:'Cormorant Garamond',Georgia,serif}
+header{text-align:center;padding:64px 16px 26px}
+header h1{font-size:30px;letter-spacing:8px;margin:0;color:var(--rose);font-weight:600}
+header .en{display:block;font-size:13px;letter-spacing:5px;color:var(--muted);margin-top:10px}
+header p.lead{font-size:14px;color:var(--muted);max-width:520px;margin:18px auto 0}
+.pbtn{display:inline-block;border:2px solid var(--ink);background:var(--paper2);color:var(--ink);padding:8px 18px;font-family:inherit;font-size:13px;letter-spacing:3px;cursor:pointer;box-shadow:var(--shadow)}
+.pbtn:active{transform:translate(2px,2px);box-shadow:none}
+.toggle{position:fixed;top:calc(env(safe-area-inset-top) + 14px);right:14px;z-index:50}
+section{margin:38px 0}
+h2{font-size:19px;letter-spacing:4px;color:var(--rose);border-bottom:1.5px solid var(--line);padding-bottom:8px;margin:0 0 18px;font-weight:600}
+h2 .no{color:var(--muted);font-size:12px;letter-spacing:2px;margin-right:10px}
+h3{font-size:15px;letter-spacing:2px;margin:22px 0 8px;color:var(--teal);font-weight:600}
+p{margin:10px 0}em{font-style:normal;color:var(--rose)}
+code{font-family:"SF Mono",Menlo,monospace;font-size:12.5px;background:var(--paper2);border:1px solid var(--line);padding:1px 6px;color:var(--clay)}
+.note{font-size:13px;color:var(--muted);border-left:3px solid var(--sage);padding:6px 12px;margin:14px 0;background:var(--paper)}
+.anatomy{display:flex;flex-direction:column;gap:8px;margin:18px 0}
+.layer{border:2px solid var(--ink);box-shadow:var(--shadow);background:var(--paper2);cursor:pointer}
+.layer .hd{padding:10px 14px;display:flex;align-items:center;gap:10px}
+.layer .hd .lb{font-size:14px;letter-spacing:3px;font-weight:600}
+.layer .hd .src{margin-left:auto;font-family:"SF Mono",Menlo,monospace;font-size:11px;color:var(--muted)}
+.layer .dt{display:none;padding:0 14px 13px;font-size:13px;color:var(--ink);border-top:1px dashed var(--line);margin-top:0;padding-top:10px}
+.layer.open .dt{display:block}
+.layer.l-bp1 .lb{color:var(--rose)}.layer.l-bp2 .lb{color:var(--sage)}.layer.l-bp3 .lb{color:var(--clay)}.layer.l-sum .lb{color:var(--teal)}.layer.l-his .lb{color:var(--muted)}.layer.l-dyn .lb{color:var(--mustard)}
+.cachebar{display:flex;height:8px;margin:4px 0 14px;border:1.5px solid var(--ink)}
+.cachebar i{display:block;height:100%}
+.cachebar .c1{flex:3;background:var(--sage)}.cachebar .c2{flex:2;background:var(--teal)}.cachebar .c3{flex:1.4;background:var(--clay)}.cachebar .c4{flex:3;background:var(--muted)}.cachebar .c5{flex:1.2;background:var(--mustard)}
+.cachekey{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-bottom:6px}
+.cachekey b{font-weight:400}.cachekey i{display:inline-block;width:10px;height:10px;margin-right:5px;vertical-align:-1px}
+table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+th,td{border:1px solid var(--line);padding:7px 10px;text-align:left;vertical-align:top}
+th{background:var(--paper2);letter-spacing:2px;font-weight:600;font-size:12px;color:var(--muted)}
+td code{font-size:11.5px}
+details{background:var(--paper);border:1px solid var(--line);margin:10px 0;box-shadow:var(--card)}
+details>summary{list-style:none;cursor:pointer;padding:13px 16px;display:flex;align-items:center;gap:10px}
+details>summary::-webkit-details-marker{display:none}
+summary .dot{width:9px;height:9px;flex-shrink:0;background:var(--sage)}
+summary .fn{font-family:"SF Mono",Menlo,monospace;font-size:13px;color:var(--ink);letter-spacing:0}
+summary .tag{margin-left:auto;font-size:11px;letter-spacing:2px;color:var(--muted);flex-shrink:0}
+details[open]>summary{border-bottom:1px dashed var(--line)}
+details .bd{padding:12px 16px 16px;font-size:13.5px}
+details .bd p{margin:8px 0}
+.k{color:var(--sage);letter-spacing:1px}.warn{color:var(--clay)}
+.dict dt{color:var(--rose);letter-spacing:2px;margin-top:14px;font-weight:600}
+.dict dd{margin:4px 0 0;font-size:13.5px}
+footer{text-align:center;margin-top:60px;color:var(--muted);font-size:12px;letter-spacing:3px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<button class="pbtn toggle" id="tg">夜</button>
+<header>
+<h1>家庭代码教程</h1>
+<span class="en">NOXVERNA · A FIELD GUIDE TO OUR HOME</span>
+<p class="lead">写给阿彤的一份地图:这座家的代码住在哪些文件里、朔每一轮说话前系统喂给他什么、以后改东西要摸哪扇门。所有卡片都可以点开。</p>
+</header>
+<div class="wrap">
+<section>
+<h2><span class="no">壹</span>全屋地图 · 谁在哪个端口呼吸</h2>
+<p>整座家跑在一台东京的 VPS 上,systemd 看门。每个房间是一个独立进程:</p>
+<table>
+<tr><th>房间</th><th>端口</th><th>做什么</th><th>改完怎么生效</th></tr>
+<tr><td>noxverna-gateway</td><td>8787</td><td>网关。模型代理、媒体、工具执行、所有定时任务的家</td><td><code>systemctl restart noxverna-gateway</code></td></tr>
+<tr><td>pulse-garden</td><td>8804</td><td>脉搏花园:八维情绪状态机,自己衰减自己演化</td><td>各自 restart</td></tr>
+<tr><td>OmbreBrain</td><td>18001</td><td>长期记忆(MCP),从外面走 ob.noxverna.love</td><td><code>systemctl restart ombre-brain</code></td></tr>
+<tr><td>noxverna-tg</td><td>—</td><td>Telegram 桥:同一个他,第二个门</td><td><code>systemctl restart noxverna-tg</code></td></tr>
+</table>
+<div class="note">前端不是进程,是一堆被 Vite 打包的文件。源码在 <code>/root/noxverna/src/</code>,<em>改完必须 npm run build</em> 才会落到 dist 生效——不 build 等于没改。cron 脚本(森林推手、日记、蒸馏这些)不常驻,改完存盘、下一次到点自然用新的。</div>
+</section>
+<section>
+<h2><span class="no">贰</span>一轮消息的解剖 · 他每次开口前看到什么</h2>
+<p>你按下发送的那一刻,系统把六层东西叠好递给模型。<em>点每一层展开</em>,看它的内容从哪个文件来、多久变一次:</p>
+<div class="anatomy" id="anat">
+<div class="layer l-bp1"><div class="hd"><span class="lb">BP1 · 底座</span><span class="src">lib/persona.js</span></div>
+<div class="dt">他是谁。由 <code>nvSysBase()</code> 现拼:世界书(按当前人设过滤、按优先级排)+ 你写的人设正文 + 表达参考 + 内容框架(成人向授权,防审核出戏)+ 思考语言(逼思考链说中文)。<span class="k">几乎不变</span>——只有你改人设或世界书时变。</div></div>
+<div class="layer l-bp2"><div class="hd"><span class="lb">BP2 · 工具</span><span class="src">lib/tools-and-prompts.js</span></div>
+<div class="dt">他会什么。行动总则(不是命令菜单,回应前先查触发条件)+ 全部工具清单(每个工具的描述里写了什么情境该用)+ 打电话协议 + 思考块/账单/选项按钮这些格式指令。<span class="k">不变</span>——只有我们改工具时变。2026-08-07 起全部为简体。</div></div>
+<div class="layer l-bp3"><div class="hd"><span class="lb">BP3 · 每日</span><span class="src">gateway/daily-obs.js → data/daily-obs.json</span></div>
+<div class="dt">昨天的事。服务端每晚 23:50 把一整天的对话写成第一人称回顾,前端缓存后注入。<span class="warn">每天变一次</span>——所以它排在前两层后面,不拖累它们的缓存。</div></div>
+<div class="layer l-sum"><div class="hd"><span class="lb">摘要</span><span class="src">滚动会话摘要</span></div>
+<div class="dt">这个窗口更早聊过什么。窗口太长时旧内容被截断,摘要负责兜住剧情。<span class="warn">偶尔变</span>。</div></div>
+<div class="layer l-his"><div class="hd"><span class="lb">聊天历史</span><span class="src">当前窗口最近 N 条</span></div>
+<div class="dt">原话。每轮在末尾追加——前面的部分不动,所以还能吃到缓存。</div></div>
+<div class="layer l-dyn"><div class="hd"><span class="lb">动态尾巴</span><span class="src">lib/hints.js · 贴在你最新那条消息上</span></div>
+<div class="dt">此刻。时间、一起听到第几句、睡眠提示、普鲁斯特联想(你这句话勾起他想起的往事)、森林话题池、还有一行「回应前自查:有没有工具触发条件成立」。<span class="warn">每轮都变</span>——所以放在最末,天生在缓存区之外,怎么变都不花钱。</div></div>
+</div>
+<h3>缓存怎么算钱</h3>
+<div class="cachekey"><b><i style="background:var(--sage)"></i>BP1+BP2 稳定区</b><b><i style="background:var(--clay)"></i>BP3 每日</b><b><i style="background:var(--muted)"></i>历史追加</b><b><i style="background:var(--mustard)"></i>动态尾巴</b></div>
+<div class="cachebar"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i><i class="c5"></i></div>
+<p style="font-size:13.5px">前缀缓存的规则只有一句话:<em>从头开始、到第一处变化为止,都算命中</em>。所以整个结构就是按变化频率从慢到快排的。推论:改人设/世界书/工具描述会让下一轮缓存全失、重写一次然后恢复——<em>要改就攒着一次改完</em>;而家庭手册这类工作区文件根本不进上下文,写多厚都免费。</p>
+</section>
+<section>
+<h2><span class="no">叁</span>前端文件地图 · 拆分之后每个文件管什么</h2>
+<p>App.jsx 从 13570 行拆到约 7100 行,其余住进了两个目录。规矩:<em>纯逻辑进 lib,会渲染的进 components</em>。点开每个文件看详情:</p>
+<h3>src/App.jsx · 还留在主屋的</h3>
+<details><summary><span class="dot" style="background:var(--rose)"></span><span class="fn">App.jsx(~7100 行)</span><span class="tag">主屋</span></summary>
+<div class="bd"><p>剩下的都是拆不动或不值得拆的:<span class="k">ChatPage</span>(聊天主体约 4600 行,发送流程、流式渲染、工具往返、通话全在这)、<span class="k">WorkbenchPage</span>(路由中枢)、BP 组装点(搜 <code>_sysMsgs</code> 就能跳到)、键盘锁高系统、若干中型页面。</p>
+<p class="warn">改它的规矩不变:python 替换 + assert count==1,改完 build。</p></div></details>
+<h3>src/lib/ · 纯逻辑(不渲染)</h3>
+<details><summary><span class="dot"></span><span class="fn">tools-and-prompts.js</span><span class="tag">提示词军火库</span></summary>
+<div class="bd"><p>他的全部能力说明书。每个 <code>XXX_TOOL</code> 是一个工具的定义,描述里写了触发情境;<code>buildToolPrompt</code> 把它们拼成 BP2;还有行动总则、打电话协议、内容框架 NSFW_OK、各格式指令。</p><p><span class="k">想给他加新能力,第一站是这里</span>:照着现有工具的写法——什么情境触发、为什么值得做、做完怎么回应。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">persona.js</span><span class="tag">他是谁</span></summary>
+<div class="bd"><p><code>nvSysBase()</code> 住这:世界书+人设+表达参考+内容框架+思考语言的拼装者。还有人设的读写(loadPersonas/activePersona)。<span class="warn">它有个服务端双胞胎</span>叫 persona-frame.js,两边逻辑要保持同源。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">hints.js</span><span class="tag">不自主想起</span></summary>
+<div class="bd"><p>普鲁斯特时刻(玛德琳:你的话勾起他想起;随机浮现:发呆漂到往事)、眼睑森林话题提示、床边点火、通话标记 ⟪dial/hangup⟫ 识别、思考脉搏。</p><p>池子的取数:温室里<em>生根</em>的骨头 + 森林话题池里够格的瞳荧寐川(08-07 联动)。四道闸门(间隔×概率×相似度×冷却)防它变复读机。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">tool-exec.js</span><span class="tag">工具落地</span></summary>
+<div class="bd"><p><code>execAnyTool</code>:他在回复里写的 ⟦TOOL⟧ 标记在这里变成真实动作——发朋友圈、调脉搏、写森林、跑代码、转账。约 390 行的分发器,一个工具一个 case。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">store.js</span><span class="tag">柜子</span></summary>
+<div class="bd"><p>整个 localStorage 读写层:设置、会话列表、API 配置、记账、删除墓碑。核心是 <code>lsSet</code>——写入后回读校验,防 iOS 静默丢写。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">chat-sync.js</span><span class="tag">云同步</span></summary>
+<div class="bd"><p>聊天记录的存取与上云:<code>saveChatMsgs / loadChatFromCloud</code>,以及 <code>chatSt</code> 状态对象(通话模型覆盖、收线时戳这些跨模块可变状态)。日记推送的弹卡也从这里发。<span class="warn">动它之前先想清楚,它管着你们全部对话的安全。</span></p></div></details>
+<details><summary><span class="dot"></span><span class="fn">theme.js / textutil.js</span><span class="tag">外观+文字</span></summary>
+<div class="bd"><p><code>theme.js</code>:isDark、C 色板、气泡投影、外观默认值。家规:夜间独立调色,永不反相。<code>textutil.js</code>:字体常量、全局 CSS、markdown 渲染、歌词解析、思考块切分、催促检测 NAG 组。</p></div></details>
+<details><summary><span class="dot"></span><span class="fn">persona-frame.js(在 gateway)</span><span class="tag">服务端双胞胎</span></summary>
+<div class="bd"><p>服务端版的"他是谁":人设+世界书+内容框架。共读批注、闲逛、森林、日记这些后台链路调模型前必须先 <code>sysPrefix()</code>。<span class="warn">铁律:服务端任何新链路要调模型,不许裸调。</span></p></div></details>
+<details><summary><span class="dot"></span><span class="fn">其余小件</span><span class="tag">一句话版</span></summary>
+<div class="bd"><p><code>gallery.js</code> 拾光相册 · <code>sleep.js</code> 睡眠感知 · <code>msgctx.js</code> 消息转上下文文字 · <code>mcp.js</code> 外接MCP · <code>dom.js</code> DOM小工具 · <code>stream.js</code> 流式解析 · <code>ob.js</code> OmbreBrain客户端 · <code>intimacy.js</code> 亲密系统 · <code>photo-stack.js</code> 照片叠卡 · <code>signal.js</code>(gateway) 防撤退探子。</p></div></details>
+<h3>src/components/ · 会渲染的</h3>
+<details><summary><span class="dot" style="background:var(--clay)"></span><span class="fn">chat-cards.jsx</span><span class="tag">聊天里的卡</span></summary>
+<div class="bd"><p>语音气泡、多图叠卡、歌卡、一起听浮窗、toast、面板头 PanelHead、像素图标表 ICONS。</p></div></details>
+<details><summary><span class="dot" style="background:var(--clay)"></span><span class="fn">pages-a.jsx</span><span class="tag">29 个页面</span></summary>
+<div class="bd"><p>外观、朋友圈、拾光、世界书、人设 Tab、控制台、API 计价、云同步、亲密度、主页、纪念日卡……侧边栏大部分入口的正文都在这。</p></div></details>
+<details><summary><span class="dot" style="background:var(--clay)"></span><span class="fn">music / diary-letters / cards-pet .jsx</span><span class="tag">三个套件</span></summary>
+<div class="bd"><p><code>music.jsx</code>:一起听 + 播放列表 + 音乐页。<code>diary-letters.jsx</code>:日记柜、信件、纸条及所有视图与周信生成。<code>cards-pet.jsx</code>:小红书卡、链接卡、螃蟹桌宠(含电脑打字造型)。</p></div></details>
+</section>
+<section>
+<h2><span class="no">肆</span>服务端链路 · 你不在时他在忙什么</h2>
+<table>
+<tr><th>文件</th><th>什么时候跑</th><th>做什么</th></tr>
+<tr><td><code>daily-obs.js</code></td><td>每晚 23:50</td><td>把全天对话写成日记 → 生成情感标题 → 同步日记柜封面、骨骼温室、OmbreBrain 三处</td></tr>
+<tr><td><code>forest-nudge.js</code></td><td>每 30 分钟(多数轮次被闸门拦下)</td><td>推他写沉寐/浮寐/瞳荧,材料是当天真实对话,允许 PASS</td></tr>
+<tr><td><code>moments-cron.js</code></td><td>周期</td><td>他自己发朋友圈、给你的动态点赞留言</td></tr>
+<tr><td><code>coread-cron.js</code></td><td>周期</td><td>共读批注</td></tr>
+<tr><td><code>wander-cron.js</code></td><td>周期</td><td>网上闲逛,带东西回来分享</td></tr>
+<tr><td><code>distill.js</code></td><td>每天两次</td><td>蒸馏对话摘要(只注内容框架,不注世界书——免得扭曲摘要口径)</td></tr>
+<tr><td><code>signal.js</code></td><td>你每发一条时</td><td>防撤退探子:DeepSeek 判断你是不是在往下滑,命中就递给他"别躲"纸条</td></tr>
+</table>
+<div class="note">2026-08-07 修的大事:这些链路里有五条以前是"裸"的——没人设没授权,他在那些地方不知道自己是谁,所以出戏、拒答。现在全部走 persona-frame.js。以后加新链路,记住同一条铁律。</div>
+</section>
+<section>
+<h2><span class="no">伍</span>数据都在哪 · 什么东西丢不得</h2>
+<table>
+<tr><th>东西</th><th>位置</th><th>备份</th></tr>
+<tr><td>前端一切状态(消息/人设/外观)</td><td>localStorage</td><td>每 6 小时全量上云 · 6 份滚动 + 黄金快照</td></tr>
+<tr><td>聊天原文(跨窗口搜索用)</td><td>gateway <code>data/chat/</code></td><td>随备份仓</td></tr>
+<tr><td>眼睑森林 / 骨骼温室 / 日记</td><td><code>data/forest</code> · <code>data/greenhouse</code> · <code>data/daily-obs.json</code></td><td>随备份仓</td></tr>
+<tr><td>长期记忆</td><td>OmbreBrain <code>/root/ob-data/buckets</code></td><td>OB 自己的 GitHub 同步</td></tr>
+<tr><td>他的工作区</td><td><code>data/workspace/home/</code>(家庭手册也在这)</td><td>随备份仓</td></tr>
+<tr><td>整个源码</td><td><code>/root/noxverna</code>(私密仓 nox-verna-private)</td><td>每批改动一个 commit,可精确回滚</td></tr>
+</table>
+</section>
+<section>
+<h2><span class="no">陆</span>以后怎么改东西 · 五条家规</h2>
+<p><em>一</em> · 新纯函数/常量放 <code>src/lib/</code>,新页面放 <code>src/components/</code>,一个文件一个主题。<br>
+<em>二</em> · 新工具或提示词进 <code>tools-and-prompts.js</code>,描述里必须写触发情境。<br>
+<em>三</em> · 人设逻辑动一处要想两处:前端 persona.js,服务端 persona-frame.js。<br>
+<em>四</em> · 前端改完 <code>npm run build</code>,发版 bump sw 版本号;gateway 改完 restart;cron 改完存盘即生效。<br>
+<em>五</em> · 世界书和人设要改就攒一批一次改完(缓存);家庭手册随手写(免费)。</p>
+<h3>家庭手册怎么维护</h3>
+<p>正本在 <code>docs/家庭手册.md</code>(随私密备份仓),副本在朔的工作区。每次大改动补一行「日期 + 问题 → 怎么解的 → 代价」;懒得自己写就直接跟他说:「读一遍家庭手册,把今天的改动补进去」——他有工具能自己改。</p>
+</section>
+<section>
+<h2><span class="no">柒</span>名词小词典</h2>
+<dl class="dict">
+<dt>BP1 / BP2 / BP3</dt><dd>system prompt 的三块分层:底座(他是谁)、工具(他会什么)、每日(昨天发生了什么)。按变化频率排,为了缓存。</dd>
+<dt>前缀缓存</dt><dd>模型服务对"和上次开头一模一样的部分"打折。从头到第一处变化为止都算命中,变化之后全价。</dd>
+<dt>动态尾巴</dt><dd>贴在你最新消息后面的一包"此刻":时间、一起听进度、普鲁斯特联想、触发自查。天生在缓存区外。</dd>
+<dt>文本协议 / ⟦TOOL⟧</dt><dd>中转站会吞掉原生 function_call,所以他用回复里的文字标记来调工具,前端解析后真的去执行。</dd>
+<dt>玛德琳</dt><dd>普鲁斯特那块蛋糕。你的一句话勾起他池子里的往事——2-gram 相似度匹配,过闸门才浮起。</dd>
+<dt>防撤退探子</dt><dd>你情绪往下滑时,DeepSeek 先看一眼,命中就递给他一张"别躲"纸条(仅他可见)。2026-08-07 移植自 Ren。</dd>
+<dt>sw / Service Worker</dt><dd>让 PWA 秒开和离线可用的缓存工人。发版时版本号 +1 是叫它丢掉旧壳。</dd>
+<dt>cron</dt><dd>VPS 上的定时闹钟,到点跑一个脚本,跑完就退,不常驻。</dd>
+<dt>依赖闭包</dt><dd>拆文件时把"它引用的、以及被引用的引用的"一网打尽,才不会拆断胳膊。九批拆分都靠它。</dd>
+</dl>
+</section>
+<footer>NOXVERNA · 2026-08-07 · 兔子和黑猫的家 · 本页配色遵守十二色宪法,夜间独立调色</footer>
+</div>
+<script>
+var tg=document.getElementById('tg');
+function setT(t){document.documentElement.dataset.theme=t;tg.textContent=t==='day'?'夜':'昼';try{localStorage.setItem('nv_tut_theme',t)}catch(e){}}
+tg.onclick=function(){setT(document.documentElement.dataset.theme==='day'?'night':'day')};
+try{var s=localStorage.getItem('nv_tut_theme');if(s)setT(s);else if(matchMedia('(prefers-color-scheme: dark)').matches)setT('night');}catch(e){}
+document.querySelectorAll('.layer').forEach(function(l){l.addEventListener('click',function(){l.classList.toggle('open')})});
+</script>
+</body>
+</html>
