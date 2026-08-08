@@ -32,7 +32,7 @@ An ordinary chatbot answers "a better model." This project's answer is that the 
 
 | | |
 |---|---|
-| Frontend `App.jsx` | 13,098 lines (single file) |
+| Frontend | `App.jsx` ~7,100 lines + `lib/` + `components/` (split down from a 13,570-line single file) |
 | Gateway `server.js` | 2,514 lines |
 | Long-running services | 7 systemd units |
 | Feature panels | 14 |
@@ -45,7 +45,7 @@ An ordinary chatbot answers "a better model." This project's answer is that the 
 ### Foundations
 
 **[01 · Architecture and persistence](docs/01-architecture.md)**
-Service topology, request path, and two choices that invite pushback: JSON files instead of a database, and a 13,000-line single-file frontend. Persistence is atomic-write JSON (`write tmp → rename`) — chosen for readability, backup simplicity, and hand-repairability, at the explicit cost of concurrent writes and transactions.
+Service topology, request path, why JSON files instead of a database, and how the frontend evolved from a single file to a layered structure. Persistence is atomic-write JSON (`write tmp → rename`) — chosen for readability, backup simplicity, and hand-repairability, at the explicit cost of concurrent writes and transactions.
 
 **[02 · Context assembly](docs/02-context.md)**
 Five layers ordered by rate of change, plus a three-tier prompt cache split (**BP1 / BP2 / BP3**). Prompt caching matches on prefix, so one changed byte in the daily block would otherwise invalidate the entire persona and tool specification. Splitting them into independent cache breakpoints means the per-turn churn never touches the expensive base. A non-obvious benefit: because every panel sends a byte-identical base block first, BP1 is shared across all of them — a side-panel call hits the cache written during chat.

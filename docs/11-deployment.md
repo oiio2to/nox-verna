@@ -28,7 +28,7 @@ node --check server.js && systemctl restart <service> && \
 
 ## 编辑模式：断言唯一匹配
 
-前端是一个 13,098 行的单文件（理由见 [01](01-architecture.md)），不靠 IDE 重构，靠精确字符串替换。
+前端主文件约 7,100 行（拆分历史见 [01](01-architecture.md)），加上 `lib/` 和 `components/` 里的模块。改动不靠 IDE 重构，靠精确字符串替换——这个模式在文件还是 13,000+ 行时尤其关键，也正是它最终触发拆分的原因。
 
 每次替换前断言匹配数唯一：
 
